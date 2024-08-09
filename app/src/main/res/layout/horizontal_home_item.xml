@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="@dimen/profile_width"
+        android:layout_height="@dimen/profile_height"
+        android:elevation="@dimen/profile_elevation"
+        app:cardElevation="@dimen/profile_elevation"
+        app:cardCornerRadius="@dimen/profile_corner_radius"
+        android:layout_marginVertical="@dimen/profile_vertical_margin"
+        android:layout_marginStart="@dimen/profile_vertical_margin"
+        app:layout_constraintEnd_toStartOf="@id/profile_CARD_data"
+        app:layout_constraintStart_toStartOf="@id/profile_CARD_data"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"        >
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/profile_IMG_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            tools:src="@drawable/splash_gradient_background"
+            />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profile_CARD_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/data_start_margin"
+        android:layout_marginEnd="@dimen/data_end_margin"
+        android:layout_marginVertical="@dimen/data_end_margin"
+        android:elevation="@dimen/data_elevation"
+        app:cardCornerRadius="@dimen/profile_corner_radius"
+        app:cardElevation="@dimen/data_elevation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/data_end_margin"
+            android:layout_marginStart="@dimen/data_start_margin">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/profile_IMG_favorite"
+                android:layout_width="@dimen/heart_dimens"
+                android:layout_height="@dimen/heart_dimens"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/heart_margin"
+                android:layout_marginEnd="@dimen/heart_margin"
+                android:scaleType="fitCenter"
+                app:srcCompat="@drawable/empty_heart" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_LBL_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@id/profile_IMG_favorite"
+                android:layout_marginStart="@dimen/data_end_margin"
+                android:layout_marginTop="@dimen/data_end_margin"
+                android:layout_marginEnd="@dimen/data_end_margin"
+                android:maxLines="2"
+                android:minLines="2"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold"
+                tools:text="City Name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_LBL_rooms_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_LBL_street"
+                android:layout_alignStart="@id/profile_LBL_street"
+                android:layout_marginTop="@dimen/data_end_margin"
+                android:layout_marginEnd="@dimen/data_end_margin"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textSize="@dimen/data_text_size"
+                tools:text="number of rooms" />
+
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_LBL_street"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_LBL_city"
+                android:layout_alignStart="@id/profile_LBL_city"
+                android:layout_marginTop="@dimen/data_end_margin"
+                android:layout_marginEnd="@dimen/data_end_margin"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textSize="@dimen/data_text_size"
+                tools:text="Street Name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_LBL_apartment_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_LBL_rooms_number"
+                android:layout_alignStart="@id/profile_LBL_rooms_number"
+                android:layout_marginTop="@dimen/data_end_margin"
+                android:layout_marginEnd="@dimen/data_end_margin"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textSize="@dimen/data_text_size"
+                tools:text="apartment size in meters" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/profile_LBL_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_LBL_apartment_size"
+                android:layout_alignStart="@id/profile_LBL_apartment_size"
+                android:layout_marginTop="@dimen/data_end_margin"
+                android:layout_marginEnd="@dimen/data_end_margin"
+                android:maxLines="3"
+                android:minLines="1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="price"
+
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

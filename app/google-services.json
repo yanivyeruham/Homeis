@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "741135642907",
+    "firebase_url": "https://homies-ff92d-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "homies-ff92d",
+    "storage_bucket": "homies-ff92d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741135642907:android:bc1f0c9e6c298cda8be3be",
+        "android_client_info": {
+          "package_name": "com.example.homies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741135642907-qkla8e2j7p0jiircm3gh3oe4p4eqomn9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.homies",
+            "certificate_hash": "4b6740cc728cf245c4118ea4d70aa6c0ebe45d00"
+          }
+        },
+        {
+          "client_id": "741135642907-t839v1ieg5fkhjip9v06mgleni3igf5e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBvLi4Wbo6gkqWfR2nez5i2T6YjNCjMuc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741135642907-t839v1ieg5fkhjip9v06mgleni3igf5e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightest_orange"
+    tools:context=".HomeProfileActivity">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_TXT_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:text="RENTER PROFILE" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_IMG_person_logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/person" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_IMG_gallery_profile_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+         />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/main_ET_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:hint=" Name"
+        android:layout_marginTop="220dp"
+        android:inputType="text"
+        />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/main_ET_gender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:hint=" Gender "
+        android:layout_marginTop="280dp"
+        android:inputType="text"
+        />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/main_ET_age"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:hint=" Age"
+        android:layout_marginTop="340dp"
+        android:inputType="number"
+        />
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/main_ET_overview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginStart="@dimen/default_margin"
+        android:hint=" Personal Info"
+        android:layout_marginTop="400dp"
+        android:inputType="text"
+        />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_TXT_add_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="475dp"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:text=" TO ADD PROFILE PICTURE ->" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_choose_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginBottom="325dp"
+        android:text="add picture" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_save_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="130dp"
+        android:text="save" />
+
+
+
+
+</RelativeLayout>

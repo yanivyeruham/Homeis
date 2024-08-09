@@ -1,0 +1,115 @@
+package com.example.homies;
+
+import android.animation.ObjectAnimator;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+
+/*public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterViewHolder>
+{
+    private ListsHandler profileLists = new ListsHandler();
+    private CallBacks renterCallBack;
+
+    public RenterAdapter setRenterCallBack(CallBacks renterCallBack) {
+        this.renterCallBack = renterCallBack;
+        return this;
+    }
+
+    public RenterAdapter(ArrayList<RenterProfileActivity> renterProfiles)
+    {
+    }
+
+    @NonNull
+    @Override
+    public RenterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.horizontal_person_item,parent,false);
+        return new RenterViewHolder(view);
+    }
+
+    @Override
+    public int getItemCount() {
+        return profileLists.renterProfiles == null ? 0 :profileLists.renterProfiles.size();
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RenterViewHolder holder, int position)
+    {
+        RenterProfileActivity renterProfile = getItem(position);
+
+        ImageLoader.getInstance().load(renterProfile.getProfilePicture(),holder.profile_IMG_renter);
+        holder.profile_LBL_name.setText(renterProfile.getName());
+        holder.profile_LBL_gender.setText(renterProfile.getGender());
+        holder.profile_LBL_name.setText(renterProfile.getAge());
+        holder.profile_LBL_personal_info.setText(renterProfile.getOverview());
+
+        if(renterProfile.isFavorite())
+        {
+        holder.profile_IMG_favorite.setImageResource(R.drawable.heart);
+        }
+        else {
+            holder.profile_IMG_favorite.setImageResource(R.drawable.empty_heart);
+        }
+
+        holder.profile_CARD_data.setOnClickListener(v-> {
+            ArrayList<ObjectAnimator> animations = new ArrayList<>();
+            if (renterProfile.isCollapsed()) {
+                animations.add(ObjectAnimator
+                        .ofInt(holder.profile_LBL_personal_info, "maxLines", holder.profile_LBL_personal_info.getLineCount())
+                        .setDuration((Math.max(holder.profile_LBL_personal_info.getLineCount() - RenterProfileActivity.MAX_LINES_COLLAPSED, 0)) * 50L));
+            } else {
+                animations.add(ObjectAnimator
+                        .ofInt(holder.profile_LBL_personal_info, "maxLines", RenterProfileActivity.MAX_LINES_COLLAPSED)
+                        .setDuration((Math.max(holder.profile_LBL_personal_info.getLineCount() - RenterProfileActivity.MAX_LINES_COLLAPSED, 0)) * 50L));
+            }
+            animations.forEach(ObjectAnimator::start);
+
+            renterProfile.setCollapsed(!renterProfile.isCollapsed());
+        });
+    }
+
+    private RenterProfileActivity getItem(int position)
+    {
+        return profileLists.renterProfiles.get(position);
+    }
+
+    public class RenterViewHolder extends RecyclerView.ViewHolder
+    {
+        private final CardView profile_CARD_data;
+        private final ShapeableImageView profile_IMG_favorite;
+        private final ShapeableImageView profile_IMG_renter;
+        private final TextInputEditText profile_LBL_name;
+        private final TextInputEditText profile_LBL_gender;
+        private final TextInputEditText profile_LBL_age;
+        private final TextInputEditText profile_LBL_personal_info;
+
+        public RenterViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            profile_CARD_data = itemView.findViewById(R.id.profile_CARD_data);
+            profile_IMG_favorite = itemView.findViewById(R.id.profile_IMG_favorite);
+            profile_IMG_renter = itemView.findViewById(R.id.profile_IMG_renter);
+            profile_LBL_name = itemView.findViewById(R.id.profile_LBL_name);
+            profile_LBL_gender = itemView.findViewById(R.id.profile_LBL_gender);
+            profile_LBL_age = itemView.findViewById(R.id.profile_LBL_age);
+            profile_LBL_personal_info = itemView.findViewById(R.id.profile_LBL_personal_info);
+
+
+            profile_IMG_favorite.setOnClickListener(v->{
+                if(renterCallBack != null)
+                {
+                    renterCallBack.favoriteRenterButtonClicked(getItem(getAdapterPosition()),getAdapterPosition());
+                }
+            });
+            
+        }
+    }
+}*/
