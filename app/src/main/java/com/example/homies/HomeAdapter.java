@@ -13,19 +13,20 @@ import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-/*public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>
+public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>
 {
 
-    private ListsHandler profileLists = new ListsHandler();
-    private CallBacks homeCallBack;
+    private final ArrayList <Home> HomesList;
+    private HomeCallBack homeCallBack;
 
-    public HomeAdapter setRenterCallBack(CallBacks homeCallBack) {
+    public HomeAdapter setRenterCallBack(HomeCallBack homeCallBack) {
         this.homeCallBack = homeCallBack;
         return this;
     }
 
-    public HomeAdapter(ArrayList<HomeProfileActivity> homeProfiles)
+    public HomeAdapter(ArrayList<Home> homesList)
     {
+        HomesList = homesList;
     }
 
 
@@ -38,23 +39,23 @@ import java.util.ArrayList;
 
     @Override
     public int getItemCount() {
-        return profileLists.homeProfiles == null ? 0 :profileLists.homeProfiles.size();
+        return HomesList == null ? 0 :HomesList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.HomeViewHolder holder, int position)
     {
-        HomeProfileActivity homeProfile = getItem(position);
+        Home home = getItem(position);
 
 
-        ImageLoader.getInstance().load(homeProfile.getProfilePicture(),holder.profile_IMG_home);
-        holder.profile_LBL_city.setText(homeProfile.getCity());
-        holder.profile_LBL_rooms_number.setText(homeProfile.getNumberOfRooms());
-        holder.profile_LBL_street.setText(homeProfile.getStreet());
-        holder.profile_LBL_apartment_size.setText(homeProfile.getApartmentSize());
-        holder.profile_LBL_price.setText(homeProfile.getPrice());
+        //ImageLoader.getInstance().load(home.getProfilePicture(),holder.profile_IMG_home);
+        holder.profile_LBL_city.setText(home.getCity());
+        holder.profile_LBL_rooms_number.setText(String.valueOf(home.getNumberOfRooms()));
+        holder.profile_LBL_street.setText(home.getStreet());
+        holder.profile_LBL_apartment_size.setText(String.valueOf(home.getApartmentSize()));
+        holder.profile_LBL_price.setText(String.valueOf(home.getPrice()));
 
-        if(homeProfile.isFavorite())
+        if(home.isFavorite())
         {
             holder.profile_IMG_favorite.setImageResource(R.drawable.heart);
         }
@@ -64,14 +65,14 @@ import java.util.ArrayList;
 
     }
 
-    private HomeProfileActivity getItem(int position)
+    private Home getItem(int position)
     {
-        return profileLists.homeProfiles.get(position);
+        return HomesList.get(position);
     }
 
     public class HomeViewHolder extends RecyclerView.ViewHolder
     {
-        private final ShapeableImageView profile_IMG_home;
+        //private final ShapeableImageView profile_IMG_home;
         private final CardView profile_CARD_data;
 
         private final ShapeableImageView profile_IMG_favorite;
@@ -85,7 +86,7 @@ import java.util.ArrayList;
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            profile_IMG_home = itemView.findViewById(R.id.profile_IMG_home);
+            //profile_IMG_home = itemView.findViewById(R.id.profile_IMG_home);
             profile_CARD_data = itemView.findViewById(R.id.profile_CARD_data);
             profile_IMG_favorite = itemView.findViewById(R.id.profile_IMG_favorite);
             profile_LBL_city = itemView.findViewById(R.id.profile_LBL_city);
@@ -105,4 +106,4 @@ import java.util.ArrayList;
         }
     }
 
-}*/
+}

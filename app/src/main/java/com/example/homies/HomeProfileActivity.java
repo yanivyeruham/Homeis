@@ -1,5 +1,7 @@
 package com.example.homies;
 
+import static com.example.homies.MainActivity.homeList;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -26,7 +28,7 @@ public class HomeProfileActivity extends AppCompatActivity
 {
 
     private Uri imageUri;
-    private ListsHandler profileLists = new ListsHandler();
+   // private HomeList profileLists ;
 
     private MaterialTextView main_TXT_text;
     private AppCompatImageView main_IMG_home_logo;
@@ -109,13 +111,13 @@ public class HomeProfileActivity extends AppCompatActivity
         home.setPrice(Integer.parseInt(price));
         home.isDataSet = true;
 
-        Bitmap bmp =MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        home.setImage(baos.toByteArray());
+       // Bitmap bmp =MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+       // ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        //bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        //home.setImage(baos.toByteArray());
 
 
-        profileLists.addHomeProfileToList(home);
+        homeList.addHomeProfileToList(home);
 
 
         changeActivityToMainActivity();

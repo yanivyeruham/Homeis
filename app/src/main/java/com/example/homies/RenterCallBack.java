@@ -1,7 +1,7 @@
 package com.example.homies;
 
-public interface CallBacks
+public interface RenterCallBack
 {
     void favoriteRenterButtonClicked(Person person, int position);
-    void favoriteHomeButtonClicked(Home home, int position);
+
 }

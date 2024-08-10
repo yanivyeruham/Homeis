@@ -11,21 +11,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textview.MaterialTextView;
 
 import java.util.ArrayList;
 
-/*public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterViewHolder>
+public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterViewHolder>
 {
-    private ListsHandler profileLists = new ListsHandler();
-    private CallBacks renterCallBack;
+    private final ArrayList <Person> personsList;
+    private RenterCallBack renterCallBack;
 
-    public RenterAdapter setRenterCallBack(CallBacks renterCallBack) {
+    public RenterAdapter setRenterCallBack(RenterCallBack renterCallBack) {
         this.renterCallBack = renterCallBack;
         return this;
     }
 
-    public RenterAdapter(ArrayList<RenterProfileActivity> renterProfiles)
+    public RenterAdapter(ArrayList<Person> personsList)
     {
+        this.personsList = personsList;
     }
 
     @NonNull
@@ -37,21 +39,21 @@ import java.util.ArrayList;
 
     @Override
     public int getItemCount() {
-        return profileLists.renterProfiles == null ? 0 :profileLists.renterProfiles.size();
+        return personsList == null ? 0 :personsList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull RenterViewHolder holder, int position)
     {
-        RenterProfileActivity renterProfile = getItem(position);
+        Person person = getItem(position);
 
-        ImageLoader.getInstance().load(renterProfile.getProfilePicture(),holder.profile_IMG_renter);
-        holder.profile_LBL_name.setText(renterProfile.getName());
-        holder.profile_LBL_gender.setText(renterProfile.getGender());
-        holder.profile_LBL_name.setText(renterProfile.getAge());
-        holder.profile_LBL_personal_info.setText(renterProfile.getOverview());
+        //ImageLoader.getInstance().load(person.getProfilePicture(),holder.profile_IMG_renter);
+        holder.profile_LBL_name.setText(person.getName());
+        holder.profile_LBL_gender.setText(person.getGender());
+        holder.profile_LBL_age.setText(String.valueOf(person.getAge()));
+        holder.profile_LBL_personal_info.setText(person.getOverview());
 
-        if(renterProfile.isFavorite())
+        if(person.isFavorite())
         {
         holder.profile_IMG_favorite.setImageResource(R.drawable.heart);
         }
@@ -61,7 +63,7 @@ import java.util.ArrayList;
 
         holder.profile_CARD_data.setOnClickListener(v-> {
             ArrayList<ObjectAnimator> animations = new ArrayList<>();
-            if (renterProfile.isCollapsed()) {
+            if (person.isCollapsed()) {
                 animations.add(ObjectAnimator
                         .ofInt(holder.profile_LBL_personal_info, "maxLines", holder.profile_LBL_personal_info.getLineCount())
                         .setDuration((Math.max(holder.profile_LBL_personal_info.getLineCount() - RenterProfileActivity.MAX_LINES_COLLAPSED, 0)) * 50L));
@@ -72,31 +74,31 @@ import java.util.ArrayList;
             }
             animations.forEach(ObjectAnimator::start);
 
-            renterProfile.setCollapsed(!renterProfile.isCollapsed());
+            person.setCollapsed(!person.isCollapsed());
         });
     }
 
-    private RenterProfileActivity getItem(int position)
+    private Person getItem(int position)
     {
-        return profileLists.renterProfiles.get(position);
+        return personsList.get(position);
     }
 
     public class RenterViewHolder extends RecyclerView.ViewHolder
     {
         private final CardView profile_CARD_data;
         private final ShapeableImageView profile_IMG_favorite;
-        private final ShapeableImageView profile_IMG_renter;
-        private final TextInputEditText profile_LBL_name;
-        private final TextInputEditText profile_LBL_gender;
-        private final TextInputEditText profile_LBL_age;
-        private final TextInputEditText profile_LBL_personal_info;
+        //private final ShapeableImageView profile_IMG_renter;
+        private final MaterialTextView profile_LBL_name;
+        private final MaterialTextView  profile_LBL_gender;
+        private final MaterialTextView  profile_LBL_age;
+        private final MaterialTextView  profile_LBL_personal_info;
 
         public RenterViewHolder(@NonNull View itemView) {
             super(itemView);
 
             profile_CARD_data = itemView.findViewById(R.id.profile_CARD_data);
             profile_IMG_favorite = itemView.findViewById(R.id.profile_IMG_favorite);
-            profile_IMG_renter = itemView.findViewById(R.id.profile_IMG_renter);
+            //profile_IMG_renter = itemView.findViewById(R.id.profile_IMG_renter);
             profile_LBL_name = itemView.findViewById(R.id.profile_LBL_name);
             profile_LBL_gender = itemView.findViewById(R.id.profile_LBL_gender);
             profile_LBL_age = itemView.findViewById(R.id.profile_LBL_age);
@@ -112,4 +114,4 @@ import java.util.ArrayList;
             
         }
     }
-}*/
+}

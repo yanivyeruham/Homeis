@@ -24,7 +24,7 @@ public class RenterProfileActivity extends AppCompatActivity
     public static final int MIN_LINES_COLLAPSED = 1;
 
 
-    private ListsHandler profileLists = new ListsHandler();
+    private PersonList profileLists = new PersonList();
 
     private ShapeableImageView profile_IMG_favorite;
     private ShapeableImageView profile_IMG_renter;

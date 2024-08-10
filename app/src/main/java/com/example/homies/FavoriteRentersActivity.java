@@ -1,22 +1,27 @@
 package com.example.homies;
 
+import static com.example.homies.MainActivity.personList;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-/*public class FavoriteRentersActivity extends AppCompatActivity
+import java.io.Serializable;
+
+public class FavoriteRentersActivity extends AppCompatActivity implements Serializable
 {
     private RecyclerView main_LST_renters;
+    public static final String KEY_RENTER_PROFILES = "KEY_RENTER_PROFILES";
 
-    private ListsHandler profileLists = new ListsHandler();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_renters);
+
 
         findViews();
         initViews();
@@ -25,23 +30,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
     private void initViews()
     {
-        RenterAdapter renterAdapter = new RenterAdapter(profileLists.getRenterProfiles());
+        RenterAdapter renterAdapter = new RenterAdapter(personList.renterProfilesList);
+        //RenterAdapter renterAdapter = new RenterAdapter(personList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         main_LST_renters.setLayoutManager(linearLayoutManager);
         main_LST_renters.setAdapter(renterAdapter);
-        renterAdapter.setRenterCallBack(new CallBacks() {
+        renterAdapter.setRenterCallBack(new RenterCallBack() {
             @Override
-            public void favoriteRenterButtonClicked(RenterProfileActivity renterProfile, int position)
+            public void favoriteRenterButtonClicked(Person person, int position)
             {
-                renterProfile.setFavorite(!renterProfile.isFavorite());
+                person.setFavorite(!person.isFavorite());
                 renterAdapter.notifyItemChanged(position);
             }
 
-            @Override
-            public void favoriteHomeButtonClicked(HomeProfileActivity homeProfile, int position) {
-
-            }
         });
     }
 
@@ -49,4 +51,4 @@ import androidx.recyclerview.widget.RecyclerView;
     {
         main_LST_renters = findViewById(R.id.main_LST_renters);
     }
-}*/
+}
