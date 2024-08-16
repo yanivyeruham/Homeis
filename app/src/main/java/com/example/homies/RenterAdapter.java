@@ -1,6 +1,7 @@
 package com.example.homies;
 
 import android.animation.ObjectAnimator;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,8 +57,6 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
     {
         Person person = getItem(position);
 
-        StorageReference imageRef = getImageFromFirebase(person.getProfilePicture());
-
         //ImageLoader.getInstance().load(person.getProfilePicture(),holder.profile_IMG_renter);
         holder.profile_LBL_name.setText("Name: " + person.getName());
         holder.profile_LBL_gender.setText("Gender: " + person.getGender());
@@ -90,26 +89,24 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
             person.setCollapsed(!person.isCollapsed());
         });
 
-        // Create a local file where the image will be downloaded
-        File localFile = new File("/data/user/0/com.example.homies/cache/",  "downloaded_image.jpg");
 
-        imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        StorageReference imageRef = getImageFromFirebase(person.getProfilePicture());
+
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                // Successfully downloaded data to local file
-                // Load the image into the ImageView
+            public void onSuccess(Uri uri) {
+                // Load the image using Glide
                 Glide.with(holder.itemView.getContext())
-                        .load(localFile)
+                        .load(uri)
                         .centerCrop()
+                        .error(R.drawable.unavailable_photo) // Optional error image
                         .into(holder.profile_IMG_renter);
-                localFile.delete();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
-                Log.e("DownloadError", "Image download failed", exception);
-
+                holder.profile_IMG_renter.setImageResource(R.drawable.unavailable_photo); // Optional error image
             }
         });
     }

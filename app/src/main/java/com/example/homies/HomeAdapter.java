@@ -2,6 +2,7 @@ package com.example.homies;
 
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,11 +61,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     {
         Home home = getItem(position);
 
-        StorageReference imageRef = getImageFromFirebase(home.getProfilePicture());
-
-
-
-
         holder.profile_LBL_city.setText("City: " + home.getCity());
         holder.profile_LBL_rooms_number.setText("Number of rooms: " + String.valueOf(home.getNumberOfRooms()));
         holder.profile_LBL_street.setText("Street: " + home.getStreet() );
@@ -81,27 +77,28 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
 
         // Create a local file where the image will be downloaded
-        File localFile = new File("/data/user/0/com.example.homies/cache/",  "temp_image.jpg");
+        StorageReference imageRef = getImageFromFirebase(home.getProfilePicture());
 
-        imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        imageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
-            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                // Successfully downloaded data to local file
-                // Load the image into the ImageView
+            public void onSuccess(Uri uri) {
+                // Load the image using Glide
                 Glide.with(holder.itemView.getContext())
-                        .load(imageRef)
+                        .load(uri)
                         .centerCrop()
+                        .error(R.drawable.unavailable_photo) // Optional error image
                         .into(holder.profile_IMG_home);
-
-                //localFile.delete();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
-                Log.e("DownloadError", "Image download failed", exception);
+                holder.profile_IMG_home.setImageResource(R.drawable.unavailable_photo); // Optional error image
             }
         });
+
+
+
 
 
     }
