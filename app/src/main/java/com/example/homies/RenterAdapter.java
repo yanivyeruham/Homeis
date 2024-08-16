@@ -102,12 +102,14 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
                         .load(localFile)
                         .centerCrop()
                         .into(holder.profile_IMG_renter);
+                localFile.delete();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
                 // Handle any errors
                 Log.e("DownloadError", "Image download failed", exception);
+
             }
         });
     }
@@ -120,7 +122,7 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
 
         // Create a reference to the file you want to download
         StorageReference imagesStorageRef = storage.getReference("Images");
-        StorageReference homeImagesRef = imagesStorageRef.child("PersonImages");
+        StorageReference homeImagesRef = imagesStorageRef.child("RenterImages");
         StorageReference singleImageRef = homeImagesRef.child(picID);
 
 

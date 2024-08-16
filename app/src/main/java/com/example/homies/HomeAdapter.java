@@ -81,7 +81,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         }
 
         // Create a local file where the image will be downloaded
-        File localFile = new File("/data/user/0/com.example.homies/cache/",  "downloaded_image.jpg");
+        File localFile = new File("/data/user/0/com.example.homies/cache/",  "temp_image.jpg");
 
         imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
             @Override
@@ -89,9 +89,11 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
                 // Successfully downloaded data to local file
                 // Load the image into the ImageView
                 Glide.with(holder.itemView.getContext())
-                        .load(localFile)
+                        .load(imageRef)
                         .centerCrop()
                         .into(holder.profile_IMG_home);
+
+                //localFile.delete();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
