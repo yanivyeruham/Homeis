@@ -1,5 +1,8 @@
 package com.example.homies;
 
+import android.location.Address;
+import android.location.Geocoder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,10 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>
 {
@@ -47,13 +60,17 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
     {
         Home home = getItem(position);
 
+        StorageReference imageRef = getImageFromFirebase(home.getProfilePicture());
 
-        //ImageLoader.getInstance().load(home.getProfilePicture(),holder.profile_IMG_home);
-        holder.profile_LBL_city.setText(home.getCity());
-        holder.profile_LBL_rooms_number.setText(String.valueOf(home.getNumberOfRooms()));
-        holder.profile_LBL_street.setText(home.getStreet());
-        holder.profile_LBL_apartment_size.setText(String.valueOf(home.getApartmentSize()));
-        holder.profile_LBL_price.setText(String.valueOf(home.getPrice()));
+
+
+
+        holder.profile_LBL_city.setText("City: " + home.getCity());
+        holder.profile_LBL_rooms_number.setText("Number of rooms: " + String.valueOf(home.getNumberOfRooms()));
+        holder.profile_LBL_street.setText("Street: " + home.getStreet() );
+        holder.profile_LBL_apartment_size.setText("Apartment size: " + String.valueOf(home.getApartmentSize()) + "m");
+        holder.profile_LBL_price.setText("Price: " + String.valueOf(home.getPrice()) + "$");
+
 
         if(home.isFavorite())
         {
@@ -63,6 +80,44 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             holder.profile_IMG_favorite.setImageResource(R.drawable.empty_heart);
         }
 
+        // Create a local file where the image will be downloaded
+        File localFile = new File("/data/user/0/com.example.homies/cache/",  "downloaded_image.jpg");
+
+        imageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                // Successfully downloaded data to local file
+                // Load the image into the ImageView
+                Glide.with(holder.itemView.getContext())
+                        .load(localFile)
+                        .centerCrop()
+                        .into(holder.profile_IMG_home);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle any errors
+                Log.e("DownloadError", "Image download failed", exception);
+            }
+        });
+
+
+    }
+
+    private StorageReference getImageFromFirebase(String picID)
+    {
+        //String picID = "59b19eec-61e6-466b-b14f-c982df4cc1c5";
+        // Get a reference to the storage service, using the default Firebase App
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        // Create a reference to the file you want to download
+        StorageReference imagesStorageRef = storage.getReference("Images");
+        StorageReference homeImagesRef = imagesStorageRef.child("HomeImages");
+        StorageReference singleImageRef = homeImagesRef.child(picID);
+
+
+
+        return singleImageRef;
     }
 
     private Home getItem(int position)
@@ -72,7 +127,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
 
     public class HomeViewHolder extends RecyclerView.ViewHolder
     {
-        //private final ShapeableImageView profile_IMG_home;
+        private final ShapeableImageView profile_IMG_home;
         private final CardView profile_CARD_data;
 
         private final ShapeableImageView profile_IMG_favorite;
@@ -86,7 +141,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            //profile_IMG_home = itemView.findViewById(R.id.profile_IMG_home);
+            profile_IMG_home = itemView.findViewById(R.id.profile_IMG_home);
             profile_CARD_data = itemView.findViewById(R.id.profile_CARD_data);
             profile_IMG_favorite = itemView.findViewById(R.id.profile_IMG_favorite);
             profile_LBL_city = itemView.findViewById(R.id.profile_LBL_city);
@@ -104,6 +159,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             });
 
         }
-    }
 
+    }
 }

@@ -15,24 +15,24 @@ public class Home
     private String street;
     private int numberOfRooms;
     private int apartmentSize;
-    private int Price;
+    private int price;
+    private int postalCode;
     private String profilePicture;
     private boolean isFavorite = false;
     private boolean isCollapsed = true;
     boolean isDataSet = false;
-    public byte[] image;
 
 
-    public byte[] getImage() {
-        return image;
+    public int getPostalCode() {
+        return postalCode;
     }
 
-    public Home setImage(byte[] uriImage)
-    {
-
-        image = uriImage;
+    public Home setPostalCode(int postalCode) {
+        this.postalCode = postalCode;
         return this;
     }
+
+
 
     public boolean isDataSet() {
         return isDataSet;
@@ -103,11 +103,11 @@ public class Home
     }
 
     public int getPrice() {
-        return Price;
+        return price;
     }
 
     public Home setPrice(int price) {
-        Price = price;
+        this.price = price;
         return this;
     }
 

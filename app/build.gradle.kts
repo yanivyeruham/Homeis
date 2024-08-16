@@ -49,4 +49,13 @@ dependencies {
     implementation(libs.firebase.database)
 
     implementation (libs.glide)
+
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation(libs.firebase.storage)
+    implementation ("com.google.firebase:firebase-storage:21.0.0")
+
+    //implementation (libs.play.services.maps)
+    //implementation (libs.play.services.location)
+   // implementation (libs.dexter)
 }

@@ -107,7 +107,17 @@
         android:layout_marginBottom="130dp"
         android:text="save" />
 
-
+    <ImageButton
+        android:id="@+id/main_BTN_back"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginBottom="130dp"
+        android:scaleType="fitCenter"
+        android:background="@color/lightest_orange"
+        app:srcCompat="@drawable/back"/>
 
 
 </RelativeLayout>

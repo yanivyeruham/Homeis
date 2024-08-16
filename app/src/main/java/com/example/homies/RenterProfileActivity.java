@@ -1,9 +1,12 @@
 package com.example.homies;
 
+import static com.example.homies.MainActivity.personList;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
@@ -18,13 +21,15 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.io.FileNotFoundException;
+import java.util.UUID;
+
 public class RenterProfileActivity extends AppCompatActivity
 {
     public static final int MAX_LINES_COLLAPSED = 3;
     public static final int MIN_LINES_COLLAPSED = 1;
 
 
-    private PersonList profileLists = new PersonList();
 
     private ShapeableImageView profile_IMG_favorite;
     private ShapeableImageView profile_IMG_renter;
@@ -38,6 +43,7 @@ public class RenterProfileActivity extends AppCompatActivity
     private MaterialTextView main_TXT_add_picture;
     private MaterialButton main_BTN_choose_picture;
     private AppCompatImageView main_IMG_gallery_profile_pic;
+    private ImageButton main_BTN_back;
 
     ActivityResultLauncher<Intent> resultLauncher;
 
@@ -67,23 +73,41 @@ public class RenterProfileActivity extends AppCompatActivity
         main_IMG_gallery_profile_pic = findViewById(R.id.main_IMG_gallery_profile_pic);
         main_TXT_add_picture = findViewById(R.id.main_TXT_add_picture);
         main_BTN_choose_picture = findViewById(R.id.main_BTN_choose_picture);
+        main_BTN_back = findViewById(R.id.main_BTN_back);
 
     }
 
     private void initViews()
     {
-        main_BTN_save_input.setOnClickListener(v->setLabels(
-                main_ET_name.getText().toString(),
-                main_ET_gender.getText().toString(),
-                main_ET_age.getText().toString(),
-                main_ET_overview.getText().toString()));
+        main_BTN_save_input.setOnClickListener(v-> {
+            try {
+                setLabels(
+                        main_ET_name.getText().toString(),
+                        main_ET_gender.getText().toString(),
+                        main_ET_age.getText().toString(),
+                        main_ET_overview.getText().toString());
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
         main_BTN_choose_picture.setOnClickListener(v -> pickImage());
+        main_BTN_back.setOnClickListener((v->backToMainActivity()));
 
     }
 
-    private void setLabels(String name, String gender, String age, String overview)
+    private void backToMainActivity()
     {
+        Intent j = new Intent(this, MainActivity.class);
+        startActivity(j);
+        finish();
+    }
+
+    private void setLabels(String name, String gender, String age, String overview) throws FileNotFoundException {
+        if(name.isEmpty() || gender.isEmpty() || age.isEmpty() || overview.isEmpty()) {
+            Toast.makeText(RenterProfileActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Person person = new Person();
         person.setName(name);
         person.setGender(gender);
@@ -98,7 +122,9 @@ public class RenterProfileActivity extends AppCompatActivity
         person.setOverview(overview);
         person.isDataSet = true;
 
-        profileLists.addRenterProfileToList(person);
+        person.setProfilePicture(UUID.randomUUID().toString());
+
+        personList.addRenterProfileToList(person);
         changeActivityToMainActivity();
     }
 

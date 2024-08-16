@@ -6,7 +6,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageView;
+
 import com.google.android.material.textview.MaterialTextView;
+
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -18,6 +22,13 @@ public class MainActivity extends AppCompatActivity
     private ImageButton main_BTN_favorite_home_profiles;
     private MaterialTextView main_TXT_renter_profiles_favorites;
     private MaterialTextView main_TXT_home_profiles_favorites;
+
+    private AppCompatImageView main_TXT_circle1;
+    private AppCompatImageView main_TXT_circle2;
+    private AppCompatImageView main_TXT_circle3;
+    private AppCompatImageView main_TXT_circle4;
+    private AppCompatImageView main_TXT_pluse1;
+    private AppCompatImageView main_TXT_pluse2;
 
     static HomeList homeList = new HomeList();
     static PersonList personList = new PersonList();
@@ -44,6 +55,14 @@ public class MainActivity extends AppCompatActivity
         main_BTN_favorite_home_profiles = findViewById(R.id.main_BTN_favorite_home_profiles);
         main_TXT_renter_profiles_favorites = findViewById(R.id.main_TXT_renter_profiles_favorites);
         main_TXT_home_profiles_favorites = findViewById(R.id.main_TXT_home_profiles_favorites);
+
+        main_TXT_circle1 = findViewById(R.id.main_TXT_circle1);
+        main_TXT_circle2 = findViewById(R.id.main_TXT_circle2);
+        main_TXT_circle3 = findViewById(R.id.main_TXT_circle3);
+        main_TXT_circle4 = findViewById(R.id.main_TXT_circle4);
+        main_TXT_pluse1 = findViewById(R.id.main_TXT_pluse1);
+        main_TXT_pluse2 = findViewById(R.id.main_TXT_pluse2);
+
     }
 
     private void initViews()
@@ -54,6 +73,9 @@ public class MainActivity extends AppCompatActivity
         main_BTN_favorite_home_profiles.setOnClickListener(v->changeActivityToFavoritesHomeProfile());
 
     }
+
+
+
 
     private void changeActivityToFavoritesHomeProfile()
     {
@@ -95,6 +117,8 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
-
+//<meta-data
+   // android:name="com.google.android.geo.API_KEY"
+   // android:value="AIzaSyCLzTHzj8_vAgwzxFg_LMTnxj9CHc6rhUw" />
 
 }

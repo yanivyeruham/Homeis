@@ -5,13 +5,35 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FavoriteHomesActivity">
+    tools:context=".FavoriteHomesActivity"
+    android:background="@color/lightest_orange">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/main_LST_homes"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="40dp"
         tools:listitem="@layout/horizontal_home_item"
         />
+
+    <ImageButton
+        android:id="@+id/main_BTN_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:scaleType="fitCenter"
+        android:background="@color/lightest_orange"
+        app:srcCompat="@drawable/back" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_locations"
+        android:layout_width="113dp"
+        android:layout_height="40dp"
+        android:text="locations"
+        >
+
+    </com.google.android.material.button.MaterialButton>
 </RelativeLayout>

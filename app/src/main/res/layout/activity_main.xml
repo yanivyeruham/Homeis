@@ -13,11 +13,10 @@
 
     <ImageButton
         android:id="@+id/main_BTN_apartment_profile"
-        android:layout_width="70dp"
+        android:layout_width="80dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="150dp"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/homebutton"
         android:background="@color/lightest_orange"
         android:scaleType="fitCenter"
@@ -25,13 +24,12 @@
 
     <ImageButton
         android:id="@+id/main_BTN_person_profile"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="150dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="470dp"
+        android:layout_centerHorizontal="true"
         android:src="@drawable/person"
+        android:scaleType="fitCenter"
         android:background="@color/lightest_orange"
 
         />
@@ -40,11 +38,10 @@
         android:id="@+id/main_BTN_favorite_renters_profiles"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="340dp"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="70dp"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:src="@drawable/heart"
+        android:layout_marginEnd="35dp"
+        android:src="@drawable/person"
         android:background="@color/lightest_orange"
         android:scaleType="fitCenter"
 
@@ -54,10 +51,9 @@
         android:id="@+id/main_BTN_favorite_home_profiles"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginBottom="@dimen/default_margin"
-        android:src="@drawable/heart"
+        android:layout_marginTop="340dp"
+        android:layout_marginStart="35dp"
+        android:src="@drawable/homebutton"
         android:background="@color/lightest_orange"
         android:scaleType="fitCenter"
 
@@ -67,47 +63,116 @@
         android:id="@+id/main_TXT_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginBottom="220dp"
+        android:layout_marginTop="290dp"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="Home Profile" />
+        android:textSize="16sp"
+        android:text="Add Home Profile" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_TXT_person"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="220dp"
+        android:layout_marginTop="570dp"
+        android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:text="Person Profile" />
+        android:textSize="16dp"
+        android:text="Add Renter Profile" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_TXT_renter_profiles_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="440dp"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="100dp"
         android:textStyle="bold"
         android:textSize="17sp"
-        android:text="Favorite Renters Profile" />
+        android:text="Show Renters " />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_TXT_home_profiles_favorites"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="440dp"
         android:layout_marginStart="@dimen/default_margin"
-        android:layout_marginBottom="100dp"
         android:textStyle="bold"
-        android:textSize="17sp"
-        android:text="Favorite Home Profile" />
+        android:textSize="16sp"
+        android:text="Show Homes" />
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/main_TXT_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+       android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="70dp"
+        android:text="HoMeiS " />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_circle1"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="180dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:text="HoMe PrOfiLe"
+        android:src="@drawable/wide_circle"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_circle2"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="320dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:text="HoMe PrOfiLe"
+        android:src="@drawable/thin_circle"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_circle3"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="460dp"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:text="HoMe PrOfiLe"
+        android:src="@drawable/wide_circle"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_circle4"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="320dp"
+        android:layout_marginStart="@dimen/default_margin"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:text="HoMe PrOfiLe"
+        android:src="@drawable/thin_circle"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_pluse1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginStart="250dp"
+        android:textStyle="bold"
+        android:scaleType="fitCenter"
+        android:src="@drawable/plus"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/main_TXT_pluse2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginStart="250dp"
+        android:textStyle="bold"
+        android:scaleType="fitCenter"
+        android:src="@drawable/plus"/>
 
 </RelativeLayout>
