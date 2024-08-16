@@ -21,7 +21,12 @@ import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.UUID;
 
 public class RenterProfileActivity extends AppCompatActivity
@@ -151,6 +156,8 @@ public class RenterProfileActivity extends AppCompatActivity
                 try
                 {
                     Uri imageUri = result.getData().getData();
+                    InputStream inputStream = getContentResolver().openInputStream(imageUri);
+                    File imageFile = createFileFromInputStream(inputStream, "temp_image.jpg");
                     main_IMG_gallery_profile_pic.setImageURI(imageUri);
 
                 }catch(Exception e){
@@ -160,6 +167,34 @@ public class RenterProfileActivity extends AppCompatActivity
 
             }
         });
+    }
+
+    private File createFileFromInputStream(InputStream inputStream, String fileName) {
+        File file = null;
+        try {
+            // Create a temp file in your app's cache directory
+            file = new File(getCacheDir(), fileName);
+
+            // Open output stream to write to the file
+            OutputStream outputStream = new FileOutputStream(file);
+
+            // Buffer to hold data while copying
+            byte[] buffer = new byte[1024];
+            int length;
+
+            // Copy data from input stream to output stream
+            while ((length = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, length);
+            }
+
+            // Flush and close the output stream
+            outputStream.flush();
+            outputStream.close();
+            inputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 
     public RenterProfileActivity()
