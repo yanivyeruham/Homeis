@@ -23,7 +23,6 @@ public class FavoriteHomesActivity extends AppCompatActivity implements Serializ
 {
     private RecyclerView main_LST_homes;
     private ImageButton main_BTN_back;
-    private MaterialButton main_BTN_locations;
     public static final String KEY_HOME_PROFILES = "KEY_HOME_PROFILES";
 
     @Override
@@ -76,6 +75,5 @@ public class FavoriteHomesActivity extends AppCompatActivity implements Serializ
     {
         main_LST_homes = findViewById(R.id.main_LST_homes);
         main_BTN_back = findViewById(R.id.main_BTN_back);
-        main_BTN_locations = findViewById(R.id.main_BTN_locations);
     }
 }

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         tools:listitem="@layout/horizontal_home_item"
         />
 
@@ -28,12 +28,4 @@
         android:background="@color/lightest_orange"
         app:srcCompat="@drawable/back" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/main_BTN_locations"
-        android:layout_width="113dp"
-        android:layout_height="40dp"
-        android:text="locations"
-        >
-
-    </com.google.android.material.button.MaterialButton>
 </RelativeLayout>

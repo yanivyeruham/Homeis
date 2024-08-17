@@ -182,7 +182,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="@dimen/default_margin"
         android:layout_marginEnd="@dimen/default_margin"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="40dp"
         android:text="show all home locations"/>
 
 </RelativeLayout>
