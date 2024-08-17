@@ -39,6 +39,7 @@ dependencies {
     implementation(libs.activity)
     implementation(libs.constraintlayout)
     implementation(libs.cardview)
+    implementation(libs.play.services.maps)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,9 +54,11 @@ dependencies {
     // Add the dependency for the Cloud Storage library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation(libs.firebase.storage)
-    implementation ("com.google.firebase:firebase-storage:21.0.0")
+    implementation (libs.google.firebase.storage)
 
     //implementation (libs.play.services.maps)
-    //implementation (libs.play.services.location)
+
    // implementation (libs.dexter)
+
+    implementation (libs.play.services.location)
 }

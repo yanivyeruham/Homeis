@@ -175,4 +175,14 @@
         android:scaleType="fitCenter"
         android:src="@drawable/plus"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/main_BTN_locations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginBottom="30dp"
+        android:text="show all home locations"/>
+
 </RelativeLayout>

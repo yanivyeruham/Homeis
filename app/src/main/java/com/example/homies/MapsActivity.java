@@ -1,12 +1,26 @@
 package com.example.homies;
 
-/*import android.location.Address;
+import static com.example.homies.MainActivity.homeList;
+
+import android.content.Context;
+import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.fragment.app.FragmentActivity;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -17,53 +31,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        // Retrieve the postal code from intent or directly here
-        String postalCode = "10001"; // Replace with actual postal code
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        // Convert postal code to LatLng
-        LatLng location = getLocationFromPostalCode(postalCode);
-        if (location != null) {
-            // Move the camera to the location when the map is ready
-            moveCameraToLocation(location);
-        }
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Set initial map settings if needed (like zoom level)
+        // Get the LatLng list from the static homeList
+        List<LatLng> latLngList = getLatLngListFromHomes(this, homeList.homeProfilesList);
+
+        if (latLngList.isEmpty()) {
+            // Handle the case where no locations were found
+            Toast.makeText(this, "No locations found", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+
+        for (LatLng latLng : latLngList) {
+            mMap.addMarker(new MarkerOptions().position(latLng).title("Home Location"));
+            boundsBuilder.include(latLng);
+        }
+
+        // Move the camera to show all markers
+        int padding = 100; // Offset from edges of the map in pixels
+        LatLngBounds bounds = boundsBuilder.build();
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
     }
 
-    private LatLng getLocationFromPostalCode(String postalCode) {
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocationName(postalCode, 1);
-            if (addresses != null && !addresses.isEmpty()) {
-                Address address = addresses.get(0);
-                double latitude = address.getLatitude();
-                double longitude = address.getLongitude();
-                return new LatLng(latitude, longitude);
-            } else {
-                // Handle case where no location is found
-                System.out.println("No location found for the given postal code.");
+    private List<LatLng> getLatLngListFromHomes(Context context, List<Home> homes) {
+        Geocoder geocoder = new Geocoder(context);
+        List<LatLng> latLngList = new ArrayList<>();
+
+        for (Home home : homes) {
+            try {
+                List<Address> addressList = geocoder.getFromLocationName(String.valueOf(home.getPostalCode()), 1);
+                if (addressList != null && !addressList.isEmpty()) {
+                    Address location = addressList.get(0);
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    latLngList.add(latLng);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                // Handle exceptions (e.g., logging or showing an error message)
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        return null;
-    }
 
-    private void moveCameraToLocation(LatLng location) {
-        if (mMap != null) {
-            // Add a marker at the location and move the camera
-            mMap.addMarker(new MarkerOptions().position(location).title("Location"));
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15)); // Zoom level 15
-        }
+        return latLngList;
     }
-}*/
+}
+

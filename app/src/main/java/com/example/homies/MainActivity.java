@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textview.MaterialTextView;
 
 
@@ -30,8 +31,11 @@ public class MainActivity extends AppCompatActivity
     private AppCompatImageView main_TXT_pluse1;
     private AppCompatImageView main_TXT_pluse2;
 
+    private MaterialButton main_BTN_locations;
+
     static HomeList homeList = new HomeList();
     static PersonList personList = new PersonList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity
         main_TXT_pluse1 = findViewById(R.id.main_TXT_pluse1);
         main_TXT_pluse2 = findViewById(R.id.main_TXT_pluse2);
 
+        main_BTN_locations = findViewById(R.id.main_BTN_locations);
+
     }
 
     private void initViews()
@@ -71,10 +77,16 @@ public class MainActivity extends AppCompatActivity
         main_BTN_person_profile.setOnClickListener(v->changeActivityToRenterProfile());
         main_BTN_favorite_renters_profiles.setOnClickListener(v->changeActivityToFavoritesRenterProfile());
         main_BTN_favorite_home_profiles.setOnClickListener(v->changeActivityToFavoritesHomeProfile());
+        main_BTN_locations.setOnClickListener(v->changeActivityToMapsActivity());
 
     }
 
-
+    private void changeActivityToMapsActivity()
+    {
+        Intent intent = new Intent(this, MapsActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
     private void changeActivityToFavoritesHomeProfile()
@@ -117,8 +129,6 @@ public class MainActivity extends AppCompatActivity
         Toast.makeText(this, text, Toast.LENGTH_LONG).show();
     }
 
-//<meta-data
-   // android:name="com.google.android.geo.API_KEY"
-   // android:value="AIzaSyCLzTHzj8_vAgwzxFg_LMTnxj9CHc6rhUw" />
+
 
 }
