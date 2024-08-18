@@ -83,11 +83,23 @@ public class LoginActivity extends AppCompatActivity
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result)
     {
-        IdpResponse response = result.getIdpResponse();
+
         if (result.getResultCode() == RESULT_OK) {
+            IdpResponse response = result.getIdpResponse();
+            if (response != null && response.isNewUser())
+            {
+                // This is a sign-up event (new user)
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                // Handle the sign-up process (e.g., creating additional user profile data)
+                transactToSplashActivity();
+            } else {
+                // This is a sign-in event (existing user)
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                transactToSplashActivity();
+
+            }
             // Successfully signed in
-            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            transactToSplashActivity();
+
             // ...
         } else {
             // Sign in failed. If response is null the user canceled the
