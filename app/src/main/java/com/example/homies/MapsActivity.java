@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Pair;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -67,9 +68,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Get the LatLng list from the static homeList
-        List<LatLng> latLngList = getLatLngListFromHomes(this);
+        List<Pair<Home, LatLng>> latLngList = getLatLngListFromHomes(this);
 
-        if (latLngList.isEmpty()) {
+        if (latLngList.isEmpty())
+        {
             // Handle the case where no locations were found
             Toast.makeText(this, "No locations found", Toast.LENGTH_SHORT).show();
             return;
@@ -77,9 +79,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
 
-        for (LatLng latLng : latLngList) {
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Home Location"));
-            boundsBuilder.include(latLng);
+        for (Pair<Home, LatLng> latLng : latLngList)
+        {
+            mMap.addMarker(new MarkerOptions().position(latLng.second).title("Price: "+String.valueOf(latLng.first.getPrice())+ "$\n"
+                                                                                      //+ String.valueOf( latLng.first.getNumberOfRooms())
+                                                                             ));
+            boundsBuilder.include(latLng.second);
         }
 
         // Move the camera to show all markers
@@ -88,20 +93,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, padding));
     }
 
-    private List<LatLng> getLatLngListFromHomes(Context context) {
+    private List<Pair<Home, LatLng>> getLatLngListFromHomes(Context context) {
         Geocoder geocoder = new Geocoder(context);
-        List<LatLng> latLngList = new ArrayList<>();
+        List<Pair<Home, LatLng>> homeLocationList = new ArrayList<>();
 
-        for (Home home : homeList.homeProfilesList)
-        {
-            LatLng location = getLocationFromAddress(this, home.getStreet(), home.getCity(), String.valueOf(home.getPostalCode()));
-            if (location != null )
-            {
-                latLngList.add(location);
+        for (Home home : homeList.homeProfilesList) {
+            LatLng location = getLocationFromAddress(context, home.getStreet(), home.getCity(), String.valueOf(home.getPostalCode()));
+            if (location != null) {
+                homeLocationList.add(new Pair<>(home, location));
             }
         }
 
-        return latLngList;
+        return homeLocationList;
     }
 
     public LatLng getLocationFromAddress(Context context, String street, String city, String postalCode) {
