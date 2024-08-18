@@ -10,9 +10,19 @@ public class Person
     private String profilePicture;
     private String personalInfo;
     boolean isDataSet = false;
+    private String mail;
     private boolean isFavorite = false;
     private boolean isCollapsed = true;
     private Uri uri;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public Person setMail(String mail) {
+        this.mail = mail;
+        return this;
+    }
 
     public String getPersonalInfo() {
         return personalInfo;

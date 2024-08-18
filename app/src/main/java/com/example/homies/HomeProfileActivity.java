@@ -54,6 +54,7 @@ public class HomeProfileActivity extends AppCompatActivity
     private AppCompatImageView main_IMG_gallery_home_profile_pic;
     private ImageButton main_BTN_back;
     private TextInputEditText main_ET_postal_code;
+    private TextInputEditText main_ET_mail;
 
 
 
@@ -92,6 +93,7 @@ public class HomeProfileActivity extends AppCompatActivity
         main_IMG_gallery_home_profile_pic = findViewById(R.id.main_IMG_gallery_home_profile_pic);
         main_BTN_back = findViewById(R.id.main_BTN_back);
         main_ET_postal_code = findViewById(R.id.main_ET_postal_code);
+        main_ET_mail = findViewById(R.id.main_ET_mail);
 
 
 
@@ -106,7 +108,8 @@ public class HomeProfileActivity extends AppCompatActivity
                         main_ET_rooms_number.getText().toString(),
                         main_ET_apartment_size.getText().toString(),
                         main_ET_apartment_price.getText().toString(),
-                        main_ET_postal_code.getText().toString());
+                        main_ET_postal_code.getText().toString(),
+                        main_ET_mail.getText().toString());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -123,7 +126,7 @@ public class HomeProfileActivity extends AppCompatActivity
         resultLauncher.launch(intent);
     }
 
-    private void setLabels(String city, String street, String numberOfRooms, String Size, String price,String postalCode) throws IOException {
+    private void setLabels(String city, String street, String numberOfRooms, String Size, String price,String postalCode,String mail) throws IOException {
 
         Home home = new Home();
         if(city.isEmpty() || street.isEmpty() || numberOfRooms.isEmpty() || Size.isEmpty() || price.isEmpty() || postalCode.isEmpty()) {
@@ -137,6 +140,7 @@ public class HomeProfileActivity extends AppCompatActivity
         home.setPrice(Integer.parseInt(price));
         home.setPostalCode(Integer.parseInt(postalCode));
         home.isDataSet = true;
+        home.setMail(mail);
 
        // Bitmap bmp =MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
        // ByteArrayOutputStream baos = new ByteArrayOutputStream();

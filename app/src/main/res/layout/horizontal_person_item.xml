@@ -111,6 +111,13 @@
                 android:minLines="1"
                 android:textSize="@dimen/data_text_size"
                 tools:text="Personal information" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/contact_BTN_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email renter"
+                android:layout_below="@id/profile_LBL_personal_info"
+                />
 
 
 

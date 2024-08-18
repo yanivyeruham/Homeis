@@ -3,8 +3,10 @@ package com.example.homies;
 import static com.example.homies.MainActivity.personList;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,6 +50,28 @@ public class FavoriteRentersActivity extends AppCompatActivity implements Serial
                 renterAdapter.notifyItemChanged(position);
             }
 
+        });
+        renterAdapter.setRenterContact(new RenterContact() {
+            @Override
+            public void contactRenterButtonClicked(Person person, int position) {
+                // Construct the email content
+                String email = person.getMail(); // Assuming Person class has a getEmail() method
+                String subject = "Inquiry about your profile on Homies";
+                String body = "Hello " + person.getName() + ",\n\nI am interested in your profile. Let's get in touch!\n\nBest regards,\n[Your Name]";
+
+                // Create an Intent to send the email
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:" + email)); // Only email apps should handle this
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+
+                // Check if there's an app that can handle the intent and start the activity
+                if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                } else {
+                    Toast.makeText(FavoriteRentersActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 

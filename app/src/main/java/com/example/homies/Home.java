@@ -18,10 +18,19 @@ public class Home
     private int price;
     private int postalCode;
     private String profilePicture;
+    private String mail;
     private boolean isFavorite = false;
     private boolean isCollapsed = true;
     boolean isDataSet = false;
 
+    public String getMail() {
+        return mail;
+    }
+
+    public Home setMail(String mail) {
+        this.mail = mail;
+        return this;
+    }
 
     public int getPostalCode() {
         return postalCode;

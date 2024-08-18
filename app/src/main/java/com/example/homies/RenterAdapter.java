@@ -1,12 +1,14 @@
 package com.example.homies;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,23 +17,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterViewHolder>
 {
     private final ArrayList <Person> personsList;
     private RenterCallBack renterCallBack;
+    private RenterContact renterContact;
+
 
     public RenterAdapter setRenterCallBack(RenterCallBack renterCallBack) {
         this.renterCallBack = renterCallBack;
+        return this;
+    }
+
+    public RenterContact getRenterContact() {
+        return renterContact;
+    }
+
+    public RenterAdapter setRenterContact(RenterContact renterContact) {
+        this.renterContact = renterContact;
         return this;
     }
 
@@ -52,10 +63,19 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
         return personsList == null ? 0 :personsList.size();
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull RenterViewHolder holder, int position)
     {
+
         Person person = getItem(position);
+
+        holder.contact_BTN_contact.setOnClickListener(v -> {
+            if (renterContact != null) {
+                renterContact.contactRenterButtonClicked(person, position);
+            }
+        });
 
         //ImageLoader.getInstance().load(person.getProfilePicture(),holder.profile_IMG_renter);
         holder.profile_LBL_name.setText("Name: " + person.getName());
@@ -141,9 +161,11 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
         private final MaterialTextView  profile_LBL_gender;
         private final MaterialTextView  profile_LBL_age;
         private final MaterialTextView  profile_LBL_personal_info;
+        private final MaterialButton contact_BTN_contact;
 
 
-        public RenterViewHolder(@NonNull View itemView) {
+        public RenterViewHolder(@NonNull View itemView)
+        {
             super(itemView);
 
             profile_CARD_data = itemView.findViewById(R.id.profile_CARD_data);
@@ -153,9 +175,11 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
             profile_LBL_gender = itemView.findViewById(R.id.profile_LBL_gender);
             profile_LBL_age = itemView.findViewById(R.id.profile_LBL_age);
             profile_LBL_personal_info = itemView.findViewById(R.id.profile_LBL_personal_info);
+            contact_BTN_contact = itemView.findViewById(R.id.contact_BTN_contact);
 
 
-            profile_IMG_favorite.setOnClickListener(v->{
+            profile_IMG_favorite.setOnClickListener(v->
+            {
                 if(renterCallBack != null)
                 {
                     renterCallBack.favoriteRenterButtonClicked(getItem(getAdapterPosition()),getAdapterPosition());
@@ -163,5 +187,8 @@ public class RenterAdapter extends RecyclerView.Adapter<RenterAdapter.RenterView
             });
             
         }
+
+
     }
+
 }

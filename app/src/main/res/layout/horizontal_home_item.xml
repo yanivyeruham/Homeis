@@ -127,6 +127,14 @@
                 tools:text="price"
 
                 />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/contact_BTN_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Email property owner"
+                android:layout_below="@id/profile_LBL_price"
+                />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

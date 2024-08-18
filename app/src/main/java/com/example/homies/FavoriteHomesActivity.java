@@ -5,6 +5,7 @@ import static com.example.homies.MainActivity.homeList;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -54,6 +55,27 @@ public class FavoriteHomesActivity extends AppCompatActivity implements Serializ
                 homeAdapter.notifyItemChanged(position);
             }
         });
+        homeAdapter.setHomeContact(new HomeContact() {
+            @Override
+            public void contactHomeButtonClicked(Home home, int position) {
+                // Construct the email content
+                String email = home.getMail(); // Assuming Home class has a getContactEmail() method
+                String subject = "Inquiry about the home at " + home.getStreet() + ", " + home.getCity();
+                String body = "Hello,\n\nI am interested in your property located at " + home.getStreet() + ", " + home.getCity() + ". Please provide more details.\n\nBest regards,\n[Your Name]";
+
+                // Create an Intent to send the email
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:" + email)); // Only email apps should handle this
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+
+                // Check if there's an app that can handle the intent and start the activity
+                if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                }
+            }
+        });
+
     }
 
     /*private void changeActivityToGoogleMaps()

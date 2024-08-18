@@ -1,12 +1,13 @@
 package com.example.homies;
 
-import android.location.Address;
-import android.location.Geocoder;
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -15,26 +16,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder>
 {
 
     private final ArrayList <Home> HomesList;
     private HomeCallBack homeCallBack;
+    private HomeContact homeContact;
+
 
     public HomeAdapter setRenterCallBack(HomeCallBack homeCallBack) {
         this.homeCallBack = homeCallBack;
+        return this;
+    }
+
+    public HomeContact getHomeContact() {
+        return homeContact;
+    }
+
+    public HomeAdapter setHomeContact(HomeContact homeContact) {
+        this.homeContact = homeContact;
         return this;
     }
 
@@ -56,10 +64,19 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         return HomesList == null ? 0 :HomesList.size();
     }
 
+
+
     @Override
     public void onBindViewHolder(@NonNull HomeAdapter.HomeViewHolder holder, int position)
     {
+
         Home home = getItem(position);
+
+        holder.contact_BTN_contact.setOnClickListener(v -> {
+            if (homeContact != null) {
+                homeContact.contactHomeButtonClicked(home, position);
+            }
+        });
 
         holder.profile_LBL_city.setText("City: " + home.getCity());
         holder.profile_LBL_rooms_number.setText("Number of rooms: " + String.valueOf(home.getNumberOfRooms()));
@@ -97,10 +114,6 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             }
         });
 
-
-
-
-
     }
 
     private StorageReference getImageFromFirebase(String picID)
@@ -135,6 +148,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
         private final MaterialTextView profile_LBL_street;
         private final MaterialTextView profile_LBL_apartment_size;
         private final MaterialTextView profile_LBL_price;
+        private final MaterialButton contact_BTN_contact;
 
 
         public HomeViewHolder(@NonNull View itemView) {
@@ -148,7 +162,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeViewHolder
             profile_LBL_street = itemView.findViewById(R.id.profile_LBL_street);
             profile_LBL_apartment_size = itemView.findViewById(R.id.profile_LBL_apartment_size);
             profile_LBL_price = itemView.findViewById(R.id.profile_LBL_price);
-
+            contact_BTN_contact = itemView.findViewById(R.id.contact_BTN_contact);
 
             profile_IMG_favorite.setOnClickListener(v->{
                 if(homeCallBack != null)

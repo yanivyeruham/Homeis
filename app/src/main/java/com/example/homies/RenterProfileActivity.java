@@ -49,6 +49,7 @@ public class RenterProfileActivity extends AppCompatActivity
     private MaterialButton main_BTN_choose_picture;
     private AppCompatImageView main_IMG_gallery_profile_pic;
     private ImageButton main_BTN_back;
+    private TextInputEditText main_ET_mail;
 
     ActivityResultLauncher<Intent> resultLauncher;
 
@@ -61,6 +62,7 @@ public class RenterProfileActivity extends AppCompatActivity
         findViews();
         registerResult();
         initViews();
+
 
     }
 
@@ -79,6 +81,7 @@ public class RenterProfileActivity extends AppCompatActivity
         main_TXT_add_picture = findViewById(R.id.main_TXT_add_picture);
         main_BTN_choose_picture = findViewById(R.id.main_BTN_choose_picture);
         main_BTN_back = findViewById(R.id.main_BTN_back);
+        main_ET_mail = findViewById(R.id.main_ET_mail);
 
     }
 
@@ -90,7 +93,8 @@ public class RenterProfileActivity extends AppCompatActivity
                         main_ET_name.getText().toString(),
                         main_ET_gender.getText().toString(),
                         main_ET_age.getText().toString(),
-                        main_ET_overview.getText().toString());
+                        main_ET_overview.getText().toString(),
+                        main_ET_mail.getText().toString());
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }
@@ -108,7 +112,7 @@ public class RenterProfileActivity extends AppCompatActivity
         finish();
     }
 
-    private void setLabels(String name, String gender, String age, String overview) throws FileNotFoundException {
+    private void setLabels(String name, String gender, String age, String overview,String mail) throws FileNotFoundException {
         if(name.isEmpty() || gender.isEmpty() || age.isEmpty() || overview.isEmpty()) {
             Toast.makeText(RenterProfileActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -116,6 +120,7 @@ public class RenterProfileActivity extends AppCompatActivity
         Person person = new Person();
         person.setName(name);
         person.setGender(gender);
+        person.setMail(mail);
         if(age == null)
         {
             person.setAge(0);
