@@ -163,7 +163,8 @@ public class RenterProfileActivity extends AppCompatActivity
                     Uri imageUri = result.getData().getData();
                     InputStream inputStream = getContentResolver().openInputStream(imageUri);
                     File imageFile = createFileFromInputStream(inputStream, "temp_image.jpg");
-                    main_IMG_gallery_profile_pic.setImageURI(imageUri);
+                    //main_IMG_gallery_profile_pic.setImageURI(imageUri);
+                    main_IMG_person_logo.setImageURI(imageUri);
 
                 }catch(Exception e){
                     Toast.makeText(RenterProfileActivity.this,"No Image selected",Toast.LENGTH_SHORT).show();

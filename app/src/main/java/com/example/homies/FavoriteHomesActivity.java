@@ -2,6 +2,7 @@ package com.example.homies;
 
 import static com.example.homies.MainActivity.homeList;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
@@ -9,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,13 +67,30 @@ public class FavoriteHomesActivity extends AppCompatActivity implements Serializ
 
                 // Create an Intent to send the email
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
-                emailIntent.setData(Uri.parse("mailto:" + email)); // Only email apps should handle this
+                //emailIntent.setType("message/rfc822");
+                //emailIntent.setData(Uri.parse("mailto:" + email));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{email});// Only email apps should handle this
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
                 emailIntent.putExtra(Intent.EXTRA_TEXT, body);
 
                 // Check if there's an app that can handle the intent and start the activity
-                if (emailIntent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(emailIntent);
+                if (emailIntent.resolveActivity(getPackageManager()) != null)
+                {
+                    startActivity(Intent.createChooser(emailIntent,"Send email ..."));
+                }
+                else {
+                    // Notify the user and display an AlertDialog with the email address
+                    new AlertDialog.Builder(FavoriteHomesActivity.this)
+                            .setTitle("No Email Client Installed")
+                            .setMessage("No email app is installed on your device. You can manually copy the email address below:\n\n" + email)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss(); // Close the dialog when OK is clicked
+                                }
+                            })
+                            .setCancelable(false) // Make sure the user has to click OK to dismiss
+                            .show();
                 }
             }
         });

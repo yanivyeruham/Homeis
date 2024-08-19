@@ -96,7 +96,7 @@
         android:layout_marginStart="@dimen/default_margin"
         android:hint=" Enter mail"
         android:layout_marginTop="580dp"
-        android:inputType="number"
+        android:inputType="text"
         />
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/main_TXT_add_picture"
@@ -133,8 +133,7 @@
         android:id="@+id/main_IMG_gallery_home_profile_pic"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:visibility="visible"
-        />
+        android:visibility="visible" />
 
     <ImageButton
         android:id="@+id/main_BTN_back"

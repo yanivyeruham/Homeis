@@ -30,8 +30,7 @@
         android:id="@+id/main_IMG_gallery_profile_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
-         />
+        android:visibility="invisible" />
 
 
     <com.google.android.material.textfield.TextInputEditText

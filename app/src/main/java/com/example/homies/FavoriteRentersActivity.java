@@ -2,12 +2,14 @@ package com.example.homies;
 
 import static com.example.homies.MainActivity.personList;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,20 +59,34 @@ public class FavoriteRentersActivity extends AppCompatActivity implements Serial
                 // Construct the email content
                 String email = person.getMail(); // Assuming Person class has a getEmail() method
                 String subject = "Inquiry about your profile on Homies";
-                String body = "Hello " + person.getName() + ",\n\nI am interested in your profile. Let's get in touch!\n\nBest regards,\n[Your Name]";
+                String body = "Hello " + person.getName() + ",\n\nI am interested in your profile. Let's get in touch!\n\nBest regards";
 
                 // Create an Intent to send the email
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setType("message/rfc822");
                 emailIntent.setData(Uri.parse("mailto:" + email)); // Only email apps should handle this
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+          //      emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+          //      emailIntent.putExtra(Intent.EXTRA_TEXT, body);
 
                 // Check if there's an app that can handle the intent and start the activity
                 if (emailIntent.resolveActivity(getPackageManager()) != null) {
                     startActivity(emailIntent);
-                } else {
-                    Toast.makeText(FavoriteRentersActivity.this, "No email clients installed.", Toast.LENGTH_SHORT).show();
                 }
+                else
+                {
+                        // Notify the user and display an AlertDialog with the email address
+                        new AlertDialog.Builder(FavoriteRentersActivity.this)
+                        .setTitle("No Email Client Installed")
+                        .setMessage("No email app is installed on your device. You can manually copy the email address below:\n\n" + email)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss(); // Close the dialog when OK is clicked
+                            }
+                        })
+                        .setCancelable(false) // Make sure the user has to click OK to dismiss
+                        .show();
+            }
             }
         });
     }
