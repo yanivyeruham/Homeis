@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,8 +64,8 @@ public class FavoriteRentersActivity extends AppCompatActivity implements Serial
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
                 emailIntent.setType("message/rfc822");
                 emailIntent.setData(Uri.parse("mailto:" + email)); // Only email apps should handle this
-          //      emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
-          //      emailIntent.putExtra(Intent.EXTRA_TEXT, body);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                emailIntent.putExtra(Intent.EXTRA_TEXT, body);
 
                 // Check if there's an app that can handle the intent and start the activity
                 if (emailIntent.resolveActivity(getPackageManager()) != null) {

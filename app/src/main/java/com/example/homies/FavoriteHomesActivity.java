@@ -4,9 +4,6 @@ import static com.example.homies.MainActivity.homeList;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Address;
-import android.location.Geocoder;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -15,12 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.button.MaterialButton;
-
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Locale;
 
 public class FavoriteHomesActivity extends AppCompatActivity implements Serializable
 {
